@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>おまけ1</title>
+</head>
+<body>
+<p>
+チェックボックスの確認ページ（その１）</p>
+<div>
+<label>
+<input type="checkbox" id="Chk01">お腹減ったなあ</label>
+</div>
+<p id="msg01"></p>
+
+<script>
+function valueChange(event){
+ if (Chk01.checked){
+  msg01.innerText='「腹減った」が選択されました';
+}else{
+  msg01.innerText='「腹減った」が解除されました';
+ }
+}
+
+let Chk01=document.getElementById('Chk01');
+Chk01.addEventListener('change',valueChange);
+let msg01=document.getElementById('msg01');
+</script>
+</body>
+</html>
