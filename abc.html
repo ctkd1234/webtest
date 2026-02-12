@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>おまけ26</title>
+</head>
+
+<body>
+<h4><span id="month_ji">m-1</span>月実績（<span id="month_de">m</span>月締め切り分）<span id="showNow">Today</span>時点 進捗状況</h4>
+<h4>本部長報告：<span id="reportDate">yyyy-m-d</span></h4>
+<h5>前回報告日：<span id="lastReportDate">yyyy-m-d</span>　※前回報告日から7日間の更新は保存されません（勝手にクリアします）</h5>
+
+<form id="progressForm">
+<table id="progressTable" border="3">
+  <tr>
+    <th>会社名（担当者）</th>
+    <th>月次Excel受領済<br><span id="excelReceivedDate">（yyyy-m-d）</span></th>
+    <th>月次Excel杉承認済<br><span id="excelSugicheckDate">（yyyy-m-d）</span></th>
+    <th>報告PPT杉承認済<br><span id="pptSugicheckDate">（yyyy-m-d）</span></th>
+    <th>更新日</th>
+  </tr>
+  <tr align="center" id="progressTableTaihei">
+    <td align="left"><input type="checkbox" name="Taihei" onclick="saveToLocalStorage()" value="Taihei" id="Checkbox_Taihei">タイヘイテクノス（吉良）</td>
+    <td><input type="radio" name="Taihei" id="Taihei_e" value="Taihei_e"></td>
+    <td><input type="radio" name="Taihei" id="Taihei_s" value="Taihei_s"></td>
+    <td><input type="radio" name="Taihei" id="Taihei_p" value="Taihei_p"></td>
+    <td id="Taihei_update">あ未更新</td>
+  </tr>
+  <tr align="center" id="progressTableTrinity">
+    <td align="left"><input type="checkbox" name="Trinity" onclick="saveToLocalStorage()" value="Trinity" id="Checkbox_Trinity">トリニティ（井野）</td>
+    <td><input type="radio" name="Trinity" id="Trinity_e" value="Trinity_e"></td>
+    <td><input type="radio" name="Trinity" id="Trinity_s" value="Trinity_s"></td>
+    <td><input type="radio" name="Trinity" id="Trinity_p" value="Trinity_p"></td>
+    <td id="Trinity_update">い未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHirataFE">
+    <td align="left"><input type="checkbox" name="HirataFE" onclick="saveToLocalStorage()" value="HirataFE" id="Checkbox_HirataFE">HirataFE（南）</td>
+    <td><input type="radio" name="HirataFE" id="HirataFE_e" value="HirataFE_e"></td>
+    <td><input type="radio" name="HirataFE" id="HirataFE_s" value="HirataFE_s"></td>
+    <td><input type="radio" name="HirataFE" id="HirataFE_p" value="HirataFE_p"></td>
+    <td id="HirataFE_update">う未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHCA">
+    <td align="left"><input type="checkbox" name="HCA" onclick="saveToLocalStorage()" value="HCA" id="Checkbox_HCA">HCA（井野）</td>
+    <td><input type="radio" name="HCA" id="HCA_e" value="HCA_e"></td>
+    <td><input type="radio" name="HCA" id="HCA_s" value="HCA_s"></td>
+    <td><input type="radio" name="HCA" id="HCA_p" value="HCA_p"></td>
+    <td id="HCA_update">え未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHEE">
+    <td align="left"><input type="checkbox" name="HEE" onclick="saveToLocalStorage()" value="HEE" id="Checkbox_HEE">HEE（井野）</td>
+    <td><input type="radio" name="HEE" id="HEE_e" value="HEE_e"></td>
+    <td><input type="radio" name="HEE" id="HEE_s" value="HEE_s"></td>
+    <td><input type="radio" name="HEE" id="HEE_p" value="HEE_p"></td>
+    <td id="HEE_update">お未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHSL">
+    <td align="left"><input type="checkbox" name="HSL" onclick="saveToLocalStorage()" value="HSL" id="Checkbox_HSL">HSL（井野）</td>
+    <td><input type="radio" name="HSL" id="HSL_e" value="HSL_e"></td>
+    <td><input type="radio" name="HSL" id="HSL_s" value="HSL_s"></td>
+    <td><input type="radio" name="HSL" id="HSL_p" value="HSL_p"></td>
+    <td id="HSL_update">か未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHFM">
+    <td align="left"><input type="checkbox" name="HFM" onclick="saveToLocalStorage()" value="HFM" id="Checkbox_HFM">HFM（井野）</td>
+    <td><input type="radio" name="HFM" id="HFM_e" value="HFM_e"></td>
+    <td><input type="radio" name="HFM" id="HFM_s" value="HFM_s"></td>
+    <td><input type="radio" name="HFM" id="HFM_p" value="HFM_p"></td>
+    <td id="HFM_update">き未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHET">
+    <td align="left"><input type="checkbox" name="HET" onclick="saveToLocalStorage()" value="HET" id="Checkbox_HET">HET（吉良）</td>
+    <td><input type="radio" name="HET" id="HET_e" value="HET_e"></td>
+    <td><input type="radio" name="HET" id="HET_s" value="HET_s"></td>
+    <td><input type="radio" name="HET" id="HET_p" value="HET_p"></td>
+    <td id="HET_update">く未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHCT">
+    <td align="left"><input type="checkbox" name="HCT" onclick="saveToLocalStorage()" value="HCT" id="Checkbox_HCT">HCT（吉良）</td>
+    <td><input type="radio" name="HCT" id="HCT_e" value="HCT_e"></td>
+    <td><input type="radio" name="HCT" id="HCT_s" value="HCT_s"></td>
+    <td><input type="radio" name="HCT" id="HCT_p" value="HCT_p"></td>
+    <td id="HCT_update">け未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHTS">
+    <td align="left"><input type="checkbox" name="HTS" onclick="saveToLocalStorage()" value="HTS" id="Checkbox_HTS">HTS（大塚）</td>
+    <td><input type="radio" name="HTS" id="HTS_e" value="HTS_e"></td>
+    <td><input type="radio" name="HTS" id="HTS_s" value="HTS_s"></td>
+    <td><input type="radio" name="HTS" id="HTS_p" value="HTS_p"></td>
+    <td id="HTS_update">こ未更新</td>
+  </tr>
+  <tr align="center" id="progressTableHAS">
+    <td align="left"><input type="checkbox" name="HAS" onclick="saveToLocalStorage()" value="HAS" id="Checkbox_HAS">HAS（大塚）</td>
+    <td><input type="radio" name="HAS" id="HAS_e" value="HAS_e"></td>
+    <td><input type="radio" name="HAS" id="HAS_s" value="HAS_s"></td>
+    <td><input type="radio" name="HAS" id="HAS_p" value="HAS_p"></td>
+    <td id="HAS_update">さ未更新</td>
+  </tr>
+
+</table>
+</form>
+<input type="button" value="チェックを入れたところだけクリアボタン" onclick="checkClear()">
+<br>
+<input type="button" value="全クリアボタン" onclick="allClear()">
+
+<br><br>
+<table id="deadloneTable" border="2">
+  <tr id="deadlineTitle">
+    <th>月次Excel受領</th>
+    <th>月次Excel杉承認</th>
+    <th>報告PPT杉承認</th>
+    <th>本部長報告</th>
+  </tr>
+  <tr>
+    <th name = "4" id="deadline_e_4">e4</th>
+    <th name = "4" id="deadline_s_4">s4</th>
+    <th name = "4" id="deadline_p_4">p4</th>
+    <th name = "4" id="deadline_h_4">h4</th>
+  </tr>
+    <tr>
+    <th name = "5" id="deadline_e_5">e5</th>
+    <th name = "5" id="deadline_s_5">s5</th>
+    <th name = "5" id="deadline_p_5">p5</th>
+    <th name = "5" id="deadline_h_5">h5</th>
+  </tr>
+  <tr>
+    <th name = "6" id="deadline_e_6">e6</th>
+    <th name = "6" id="deadline_s_6">s6</th>
+    <th name = "6" id="deadline_p_6">p6</th>
+    <th name = "6" id="deadline_h_6">h6</th>
+  </tr>
+  <tr>
+    <th name = "7" id="deadline_e_7">e7</th>
+    <th name = "7" id="deadline_s_7">s7</th>
+    <th name = "7" id="deadline_p_7">p7</th>
+    <th name = "7" id="deadline_h_7">h7</th>
+  </tr>
+    <tr>
+    <th name = "8" id="deadline_e_8">e8</th>
+    <th name = "8" id="deadline_s_8">s8</th>
+    <th name = "8" id="deadline_p_8">p8</th>
+    <th name = "8" id="deadline_h_8">h8</th>
+  </tr>
+  <tr>
+    <th name = "9" id="deadline_e_9">e9</th>
+    <th name = "9" id="deadline_s_9">s9</th>
+    <th name = "9" id="deadline_p_9">p9</th>
+    <th name = "9" id="deadline_h_9">h9</th>
+  </tr>
+  <tr>
+    <th name = "10" id="deadline_e_10">e10</th>
+    <th name = "10" id="deadline_s_10">s10</th>
+    <th name = "10" id="deadline_p_10">p10</th>
+    <th name = "10" id="deadline_h_10">h10</th>
+  </tr>
+  <tr>
+    <th name = "11" id="deadline_e_11">e11</th>
+    <th name = "11" id="deadline_s_11">s11</th>
+    <th name = "11" id="deadline_p_11">p11</th>
+    <th name = "11" id="deadline_h_11">h11</th>
+  </tr>
+    <tr>
+    <th name = "12" id="deadline_e_12">e12</th>
+    <th name = "12" id="deadline_s_12">s12</th>
+    <th name = "12" id="deadline_p_12">p12</th>
+    <th name = "12" id="deadline_h_12">h12</th>
+  </tr>
+  <tr>
+    <th name = "1" id="deadline_e_1">e1</th>
+    <th name = "1" id="deadline_s_1">s1</th>
+    <th name = "1" id="deadline_p_1">p1</th>
+    <th name = "1" id="deadline_h_1">h1</th>
+  </tr>
+  <tr>
+    <th name = "2" id="deadline_e_2">e2</th>
+    <th name = "2" id="deadline_s_2">s2</th>
+    <th name = "2" id="deadline_p_2">p2</th>
+    <th name = "2" id="deadline_h_2">h2</th>
+  </tr>
+  <tr>
+    <th name = "3" id="deadline_e_3">e3</th>
+    <th name = "3" id="deadline_s_3">s3</th>
+    <th name = "3" id="deadline_p_3">p3</th>
+    <th name = "3" id="deadline_h_3">h3</th>
+  </tr>
+</table>
+
+<input type="file" id="csvFileInput" accept=".csv"> <!--ファイル選択ダイアログが開く-->
+
+<script>
+//グローバル変数
+var g_names = ['Taihei','Trinity','HirataFE','HCA','HEE','HSL','HFM','HET','HCT','HTS','HAS'];
+let selectedRadioId = null;
+let selectedRadioName = null;
+const now = new Date();
+const nowYear = now.getFullYear();
+const nowMonth = now.getMonth() + 1;
+const nowDate = now.getDate();
+const days = ["日", "月", "火", "水", "木", "金", "土"];
+const nowDay = days[now.getDay()];
+const nowHours = now.getHours();
+var g_inputs = progressTable.querySelectorAll('input');
+var g_months = [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3];
+var g_deadlineTypes = ['e', 's', 'p', 'h']; // 締め切りの種類。e:Excel受領, s:杉さんExcelチェック, p:杉さんパワポチェック, h:本部長報告
+var lastMonth = (nowMonth - 1);
+  if(lastMonth == 0){
+    lastMonth = 12;
+    };
+var nextMonth = (nowMonth + 1);
+  if(nextMonth == 13){
+    nextMonth = 1;
+  };
+
+window.onload = function() { //ページ表示の際に実行する関数たち
+  setupCsvFileListener();
+  document.getElementById("showNow").innerHTML = showNow();
+  selectedRadio();
+  loadFromLocalStorage();
+  updateDateDisplay();
+  showLastReportDate();
+  autoAllClear();
+  document.getElementById("lastReportDate").innerHTML = showStrLastReportDate();
+};
+
+function autoAllClear(){
+  var lastReportDate = showLastReportDate();
+  console.log(lastReportDate);
+
+  for (let i = 0; i <= 7; i++){
+    var clearDay = new Date(lastReportDate); //報告日をclearDayという箱に入れる
+    clearDay.setDate(lastReportDate.getDate() + i);
+    // console.log(clearDay);
+    if(clearDay.toDateString() === now.toDateString()){
+      console.log("一致しました！allClear発動");
+      allClear();
+    };
+  }
+}
+
+function showLastReportDate(){
+  var lastReportMonthValue = (updateDateDisplay()-1);
+  if(lastReportMonthValue == 0){
+    lastReportMonthValue = 12;
+  };
+  // console.log(lastReportMonthValue);
+  var str_lastReportDay = document.getElementById(`deadline_h_${lastReportMonthValue}`).textContent;
+  strUpdate_lastReportDay = str_lastReportDay.replace(/\//g, '-');
+  var date_lastReportDay = new Date(strUpdate_lastReportDay);
+  return date_lastReportDay;
+}
+
+function showStrLastReportDate(){
+  var date_lastReportDate = showLastReportDate();
+  var lastRepotDate_year = date_lastReportDate.getFullYear();
+  var lastReportDate_month = date_lastReportDate.getMonth() + 1;
+  var lastReportDate_day = date_lastReportDate.getDate();
+  var str_lastRepotDate = `${lastRepotDate_year}/${lastReportDate_month}/${lastReportDate_day}`;
+  return str_lastRepotDate;
+}
+
+function setupCsvFileListener() { //CSVファイルが選ばれたときにonCsvSelect関数を呼び出す。
+  const csvValue = document.getElementById('csvFileInput');
+  csvValue.addEventListener('change',onCsvSelect);
+}
+
+function onCsvSelect(){ //this.files[0] で選ばれたファイルを取得→FileReader を使ってファイルをテキストとして読み込む→読み込み完了後readCsv関数を呼び出す。
+  const file = this.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = readCsv;
+  reader.readAsText(file);
+}
+
+function readCsv(e) { //読み込んだCSVの中身をテーブルに反映
+  const text = event.target.result;
+  const rows = text.split('\n');
+  for (let i = 0; i < g_months.length; i++) {
+    const month = g_months[i];
+    const row = rows[i].split(',');
+    document.getElementById(`deadline_e_${month}`).textContent = row[0];
+    document.getElementById(`deadline_s_${month}`).textContent = row[1];
+    document.getElementById(`deadline_p_${month}`).textContent = row[2];
+    document.getElementById(`deadline_h_${month}`).textContent = row[3];
+  }
+  updateDateDisplay();
+  document.getElementById("lastReportDate").innerHTML = showStrLastReportDate();
+  saveToLocalStorage();
+};
+
+function updateDateDisplay(){ //ページ読み込み時とCSV読み込み時と日付テーブル初期化時に、各締め切り日とタイトル「n月実績（n+1月締め切り分）」を更新する
+  var str_thisMonthDeadlineH = document.getElementById(`deadline_h_${nowMonth}`).textContent;
+  strUpdate_thisMonthDeadlineH = str_thisMonthDeadlineH.replace(/\//g, '-');
+  var date_thisMonthDeadlineH = new Date(strUpdate_thisMonthDeadlineH);
+
+  if(now > date_thisMonthDeadlineH){
+    console.log("nowMonthの本部長報告は終わりました");
+    showDeadlineNextMonth();
+    return nextMonth;
+  };
+  if(now <= date_thisMonthDeadlineH){
+    console.log("nowMonthの本部長報告が終わってません");
+    showDeadlineThisMonth();
+    //deadline_h_先月が終わっているか確かめる
+    var str_lastMonthDeadlineH = document.getElementById(`deadline_h_${lastMonth}`).textContent;
+    strUpdate_lastMonthDeadlineH = str_lastMonthDeadlineH.replace(/\//g, '-');
+    var date_lastMonthDeadlineH = new Date(strUpdate_lastMonthDeadlineH);
+    if(now < date_lastMonthDeadlineH){
+      console.log("lastMonthの本部長報告が終わってません");
+      showDeadlineLastMonth();
+      return lastMonth;
+    };
+    return nowMonth;
+  };
+}
+
+function showDeadlineThisMonth(){
+  deadlineDisplay("deadline_e", "excelReceivedDate");
+  deadlineDisplay("deadline_s", "excelSugicheckDate");
+  deadlineDisplay("deadline_p", "pptSugicheckDate");
+  deadlineDisplay("deadline_h", "reportDate");
+  monthlyProgressTitle();
+}
+
+function showDeadlineLastMonth(){
+  deadlineDisplayLastMonth("deadline_e", "excelReceivedDate");
+  deadlineDisplayLastMonth("deadline_s", "excelSugicheckDate");
+  deadlineDisplayLastMonth("deadline_p", "pptSugicheckDate");
+  deadlineDisplayLastMonth("deadline_h", "reportDate");
+  monthlyProgressTitle();
+}
+
+function showDeadlineNextMonth(){
+  deadlineDisplayNextMonth("deadline_e", "excelReceivedDate");
+  deadlineDisplayNextMonth("deadline_s", "excelSugicheckDate");
+  deadlineDisplayNextMonth("deadline_p", "pptSugicheckDate");
+  deadlineDisplayNextMonth("deadline_h", "reportDate");
+  monthlyProgressTitle();
+}
+
+function deadlineDisplay(inputId,outputId){ // 各締め切り日を反映
+  var deadlineId = inputId + "_" + nowMonth;
+  var deadlineDate = document.getElementById(deadlineId).innerHTML;
+  document.getElementById(outputId).innerHTML = deadlineDate;
+}
+
+function deadlineDisplayLastMonth(inputId,outputId){ // 各締め切り日を反映_先月
+  var deadlineIdLastMonth = inputId + "_" + lastMonth;
+  var deadlineDateLastMonth = document.getElementById(deadlineIdLastMonth).innerHTML;
+  document.getElementById(outputId).innerHTML = deadlineDateLastMonth;
+}
+
+function deadlineDisplayNextMonth(){ // 各締め切り日を反映_来月
+  var deadlineIdNextMonth = inputId + "_" + nextMonth;
+  var deadlineDateNextMonth = document.getElementById(deadlineIdNextMonth).innerHTML;
+  document.getElementById(outputId).innerHTML = deadlineDateNextMonth;
+}
+
+function monthlyProgressTitle(){ //タイトル「n月実績（n+1月締め切り分）」を作る関数
+  var month_j = now.getMonth();
+  var month_d = now.getMonth() + 1;
+  if(month_j == 0){
+    month_j = 12;
+  }
+  document.getElementById("month_ji").innerHTML = month_j;
+  document.getElementById("month_de").innerHTML = month_d;
+}
+
+function showNow(){ //現在日時を表示する。yyyy年M月d日(aaa)h時表記
+  var showNowValue = nowYear + "年" + nowMonth + "月" + nowDate + "日(" + nowDay + ")" + nowHours + "時";
+  return showNowValue;
+}
+
+function showToday(){ // yyyy年M月d日表記
+  var showTodayValue = nowYear + "年" + nowMonth + "月" + nowDate + "日";
+  return showTodayValue;
+}
+
+function selectedRadio() { // ラジオボタンが押されたらgetRadioIdAndName関数にとんでね
+  var radios = document.querySelectorAll('input[type="radio"]');
+  for (let i = 0; i < radios.length; i++) {
+    radios[i].addEventListener("click", getRadioIdAndName);
+  }
+}
+
+function getRadioIdAndName() { // 押されたラジオボタンのIDとNameを取得
+  selectedRadioId = this.id;
+  selectedRadioName = this.name;
+  updateDay();
+  backClear();
+  lightgreen();
+  saveToLocalStorage();
+}
+
+function lightgreen(){ //選択されているラジオボタンの背景色をライトグリーンにする
+  var radio = document.getElementById(selectedRadioId);
+  if (radio) {
+    radio.parentElement.style.backgroundColor = "lightgreen";
+  }
+}
+
+function backClear(){ //falseの<input>の背景色を全部なしにする
+  for(let i = 0; i < g_inputs.length; i++) {
+    if(! g_inputs[i].checked){
+      g_inputs[i].parentElement.style.backgroundColor = "";
+    }
+  }
+}
+
+function updateDay(){ //更新日を入力する
+  var updateName =  selectedRadioName + "_update";
+  document.getElementById(updateName).innerHTML = showToday();
+}
+
+function checkClear(){ //チェックボックスにチェックが入っている列のクリア（チェックボックスfalse、ラジオボタンfalse、背景色なし、更新日=="未更新"
+  for(let i = 0; i < g_inputs.length; i++) {
+    if(g_inputs[i].checked && g_inputs[i].type == "checkbox"){
+      for(let j = 0; j < 4; j++) {
+        g_inputs[i + j].parentElement.style.backgroundColor = "";
+        g_inputs[i + j].checked = false;
+      }
+      const checkUpdateId = g_inputs[i].name + "_update"
+      document.getElementById(checkUpdateId).innerHTML = "未更新";
+    }
+  }
+  saveToLocalStorage();
+}
+
+function allClear(){ //全クリア（チェックボックスfalse、ラジオボタンfalse、背景色なし、更新日=="未更新"）
+  const allInputs = document.querySelectorAll('input');
+  for (let i = 0; i < allInputs.length; i++) {
+    allInputs[i].checked = false;
+    allInputs[i].parentElement.style.backgroundColor = "";
+  }
+  for (let i = 0; i < g_names.length; i++) {
+    const company = g_names[i];
+    const updateName =  company + "_update";
+    document.getElementById(updateName).innerHTML = "未更新";
+  };
+  saveToLocalStorage();
+}
+
+function saveToLocalStorage() { //状態の保存
+  const savedData = {};
+  for(let i = 0; i < g_names.length; i++){
+    const company = g_names[i];
+    savedData[company] = {};
+
+    //チェックボタンの保存
+    const selectedCheckbox = document.querySelector(`input[type="checkbox"][name="${company}"]:checked`);
+    savedData[company].checkboxId = selectedCheckbox ? selectedCheckbox.id : null;
+
+    //ラジオボタンの保存
+    const selectedRadio = document.querySelector(`input[type="radio"][name="${company}"]:checked`);
+    savedData[company].radioId = selectedRadio ? selectedRadio.id : null; 
+  
+    //更新日の保存
+    const updateId = company + "_update";
+    savedData[company].updateText = document.getElementById(updateId).innerHTML;
+  }
+  localStorage.setItem('savedState', JSON.stringify(savedData));
+
+  saveDeadlineTable();
+}
+
+function saveDeadlineTable() { //日付テーブルの保存
+  const saveDeadlineId = {};
+
+  for (let i = 0; i < g_months.length; i++) {
+    const month = g_months[i];
+    saveDeadlineId[month] = {};
+
+    for (let j = 0; j < g_deadlineTypes.length; j++) {
+      const type = g_deadlineTypes[j];
+      const cellId = `deadline_${type}_${month}`;
+      const cell = document.getElementById(cellId);
+      saveDeadlineId[month][type] = cell ? cell.innerText : null;
+    }
+  }
+  localStorage.setItem("saveDeadline", JSON.stringify(saveDeadlineId));
+}
+
+function loadFromLocalStorage() { //復元
+  const loadedData = JSON.parse(localStorage.getItem('savedState'));
+  if (!loadedData) return;
+
+  for (let i = 0; i < g_names.length; i++) {
+    const company = g_names[i]
+    const companyData = loadedData[company];
+    if (!companyData) continue;
+
+    // チェックボタンの復元
+    if (companyData.checkboxId) {
+      const savedCheckbox = document.getElementById(companyData.checkboxId);
+      if (savedCheckbox) savedCheckbox.checked = true;
+    }
+
+    // ラジオボタンの復元
+    if (companyData.radioId) {
+      const savedRadio = document.getElementById(companyData.radioId);
+      if (savedRadio){
+        savedRadio.checked = true;
+        selectedRadioId = savedRadio.id;
+        lightgreen();
+      }
+    }
+
+    // 更新日の復元
+    const updateId = company + "_update"
+    document.getElementById(updateId).innerHTML = companyData.updateText;
+  }
+  loadDeadlineTable();
+}
+
+function loadDeadlineTable() { //日付テーブルの復元
+  const saved = JSON.parse(localStorage.getItem("saveDeadline"));
+  if (!saved) return;
+
+  for (let i = 0; i < g_months.length; i++) {
+    const month = g_months[i];
+    for (let j = 0; j < g_deadlineTypes.length; j++) {
+      const type = g_deadlineTypes[j];
+      const cellId = `deadline_${type}_${month}`;
+      const cell = document.getElementById(cellId);
+      if (cell && saved[month] && saved[month][type]) {
+        cell.innerText = saved[month][type];
+      }
+    }
+  }
+}
+
+document.addEventListener("keydown", (event) => { //隠しコマンド Ctrl + shift + r で日付データ初期化
+  if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "r") {
+    resetDeadlineTable();
+  }
+});
+
+const initialDeadline = { //日付テーブル初期値
+  4: { e: "初期値", s: "2025/4/28", p: "2025/5/12", h: "2025/5/13" },
+  5: { e: "2025/5/22", s: "2025/5/27", p: "2025/6/2", h: "2025/6/3" },
+  6: { e: "2025/6/20", s: "2025/6/23", p: "2025/6/27", h: "2025/6/30" },
+  7: { e: "2025/7/23", s: "2025/7/24", p: "2025/7/30", h: "2025/7/31" },
+  8: { e: "2025/8/21", s: "2025/8/25", p: "2025/8/29", h: "2025/9/2" },
+  9: { e: "2025/9/19", s: "2025/9/22", p: "2025/9/29", h: "2025/9/30" },
+  10: { e: "2025/10/23", s: "2025/10/24", p: "2025/10/30", h: "2025/11/6" },
+  11: { e: "2025/11/19", s: "2025/11/20", p: "2025/11/27", h: "2025/12/4" },
+  12: { e: "2025/12/18", s: "2025/12/19", p: "2025/12/24", h: "2025/12/25" },
+  1: { e: "2026/1/22", s: "2026/1/23", p: "2026/1/29", h: "2026/2/2" },
+  2: { e: "2026/2/18", s: "2026/2/19", p: "2026/2/26", h: "2026/3/3" },
+  3: { e: "2026/3/19", s: "2026/3/20", p: "2026/3/26", h: "2026/4/1" }
+};
+
+function resetDeadlineTable() { //日付テーブル初期化
+  for (let i = 0; i < g_months.length; i++) {
+    const month = g_months[i];
+    for (let j = 0; j < g_deadlineTypes.length; j++) {
+      const type = g_deadlineTypes[j];
+      const cellId = `deadline_${type}_${month}`;
+      const cell = document.getElementById(cellId);
+      if (cell) {
+        cell.innerText = initialDeadline[month][type];
+      }
+    }
+  }
+  updateDateDisplay();
+  saveDeadlineTable();
+}
+
+</script>
+</body>
+</html>
